@@ -1,0 +1,3 @@
+{
+    "prompt": "以下の側面に基づいてディベートの評価を行ってください:\n\n側面: {aspect}\n説明: {description}\n\n評価ポイント:\n{evaluation_points}\n\n評価対象:\n{context}\n\n上記の基準に基づいて評価を行い、具体的なフィードバックと改善提案を提供してください。"
+  }
