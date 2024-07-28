@@ -1,140 +1,122 @@
 [
     {
-    "aspect": "論理構造",
-    "description": "議論の論理的構造と推論の質を評価し、改善点を提案します",
-    "target_documents": ["affirmative_argument", "reconstruction"],
-    "evaluation_points": [
+      "aspect": "メリット評価",
+      "description": "議題を肯定することのメリットを強く主張できているか",
+      "target_documents": ["affirmative_argument", "counter_argument","reconstruction"],
+      "weight": 1,
+      "evaluation_points": [
         {
-        "focus": "前提の明確性",
-        "guiding_questions": [
-            "主張の前提は明確に述べられていますか？",
-            "前提が暗黙的な場合、どのように明示できるでしょうか？"
-        ],
-        "improvement_suggestions": [
-            "前提を明確に述べることで、議論の土台を強化できます。",
-            "各前提の妥当性を検討し、必要に応じて追加の証拠や説明を提供してください。"
-        ]
+          "focus": "メリットの大きさ",
+          "sub_evaluation_points": [
+            "議題を肯定することで得られるメリットは考えられるデメリットよりも大きいか",
+            "議題を肯定する前と後で変化が大きいか"
+          ],
+          "sub_target_document":["affirmative_argument", "counter_arugment", "reconstruction"],
+          "improvement_suggestions": [],
+          "sub_weight": 1
         },
         {
-        "focus": "論理の一貫性",
-        "guiding_questions": [
-            "議論全体を通じて論理の流れは一貫していますか？",
-            "論理の飛躍や矛盾する点はありませんか？"
-        ],
-        "improvement_suggestions": [
-            "論理の流れを図式化してみると、一貫性の確認に役立ちます。",
-            "各段落や主張の間のつながりを明確にするための接続語や説明を追加することを検討してください。"
-        ]
-        },
-        {
-        "focus": "結論の妥当性",
-        "guiding_questions": [
-            "結論は前提と論理から適切に導かれていますか？",
-            "結論に至るまでの推論過程に飛躍はありませんか？"
-        ],
-        "improvement_suggestions": [
-            "結論に至るまでの論理の道筋を再確認し、必要に応じて中間的な推論ステップを追加してください。",
-            "結論が前提や議論の本筋から外れていないか確認し、必要に応じて調整してください。"
-        ]
+          "focus": "メリットを得られる確率",
+          "sub_evaluation_points": [
+            "主張するメリットを得るためのプランは現実的に実行可能なものなのか"
+          ],
+          "sub_target_document":["affirmative_argument", "reconstruction"],
+          "improvement_suggestions": [],
+          "sub_weight": 1
         }
-    ]
+      ]
     },
     {
-    "aspect": "証拠の使用",
-    "description": "主張を裏付ける証拠の質と適切性を評価し、改善点を提案します",
-    "target_documents": ["affirmative_argument", "reconstruction"],
-    "evaluation_points": [
+      "aspect": "論理性評価",
+      "description": "主張が論理的に構築され、説得力のある議論を展開しているか",
+      "target_documents": ["affirmative_argument", "counter_argument", "reconstruction"],
+      "weight": 1,
+      "evaluation_points": [
         {
-        "focus": "証拠の信頼性",
-        "guiding_questions": [
-            "使用されている証拠は信頼できる源泉から得られていますか？",
-            "証拠の出典は適切に引用されていますか？"
-        ],
-        "improvement_suggestions": [
-            "学術論文や信頼性の高い機関からのデータを優先的に使用することを検討してください。",
-            "各証拠の出典を明確に示し、必要に応じて証拠の信頼性について簡単な説明を加えてください。"
-        ]
+          "focus": "論理構造の一貫性",
+          "sub_evaluation_points": [
+            "主張の前提から結論までの論理の流れに飛躍や矛盾はないか",
+            "各論点が全体の主張を支持するよう適切に関連付けられているか"
+          ],
+          "sub_target_document": ["affirmative_argument","reconstruction"],
+          "improvement_suggestions": [],
+          "sub_weight": 1
         },
         {
-        "focus": "証拠の関連性",
-        "guiding_questions": [
-            "提示された証拠は主張と直接的に関連していますか？",
-            "証拠はどのように主張を支持していますか？"
-        ],
-        "improvement_suggestions": [
-            "各証拠と主張の関連性を明確に説明してください。",
-            "関連性が薄い証拠は除外するか、その重要性をより明確に説明することを検討してください。"
-        ]
+          "focus": "証拠の適切性と信頼性",
+          "sub_evaluation_points": [
+            "主張を裏付ける証拠や事例が適切に提示されているか",
+            "提示された証拠は信頼できる出典から得られたものか"
+          ],
+          "sub_target_document": ["affirmative_argument","reconstruction"],
+          "improvement_suggestions": [],
+          "sub_weight": 1
         }
-    ]
+      ]
     },
     {
-    "aspect": "反論への対応",
-    "description": "反論に対する対応の適切性と効果を評価し、改善点を提案します",
-    "target_documents": ["reconstruction"],
-    "evaluation_points": [
+      "aspect": "反論への対応",
+      "description": "受けた反論を正確に認識し，自らの主張を守る，あるいは強化できているか",
+      "target_documents": ["counter_argument","reconstruction"],
+      "weight": 1,
+      "evaluation_points": [
         {
-        "focus": "反論の理解と認識",
-        "guiding_questions": [
-            "相手の反論を正確に理解し、適切に要約できていますか？",
-            "反論の核心を捉えていますか？"
-        ],
-        "improvement_suggestions": [
-            "反論を自分の言葉で簡潔に要約し、相手の主張を正確に理解していることを示してください。",
-            "反論の中で最も重要な点を特定し、それに焦点を当てて対応することを検討してください。"
-        ]
+          "focus": "反論の理解と認識",
+          "sub_evaluation_points": [
+            "相手の反論を正確に理解しているか",
+            "反論の核心を捉えているか"
+          ],
+          "sub_target_document": ["reconstruction"],
+          "improvement_suggestions": [],
+          "sub_weight": 1
         },
         {
-        "focus": "反論への直接的対応",
-        "guiding_questions": [
-            "反論に対して具体的かつ直接的に応答していますか？",
-            "反論の弱点や限界を適切に指摘していますか？"
-        ],
-        "improvement_suggestions": [
-            "反論の各ポイントに対して具体的に応答し、なぜその反論が成立しないか、または限定的であるかを説明してください。",
-            "可能な場合、反論で使用されている同じ証拠や論理を用いて、自分の主張を支持する方法を検討してください。"
-        ]
+          "focus": "反論への対応",
+          "sub_evaluation_points": [
+            "反論に対して直接的に応答しているか",
+            "反論の問題や限界を適切に指摘しているか"
+          ],
+          "sub_target_document": ["reconstruction"],
+          "improvement_suggestions": [],
+          "sub_weight": 1
         },
         {
-        "focus": "主張の強化と再構築",
-        "guiding_questions": [
-            "反論を受けて、自身の主張をどのように強化または修正していますか？",
-            "再構築された主張は、元の主張よりも説得力が増していますか？"
-        ],
-        "improvement_suggestions": [
-            "反論から学んだ点を明確にし、それを踏まえてどのように自身の主張を改善したかを説明してください。",
-            "必要に応じて元の主張を修正し、より堅牢で包括的な議論を構築することを検討してください。"
-        ]
+          "focus": "主張の強化と再構築",
+          "sub_evaluation_points": [
+            "反論を受けて、自身の主張を強化または修正しているか",
+            "再構築された主張は、元の主張よりも説得力が増しているか"
+          ],
+          "sub_target_document": ["reconstruction"],
+          "improvement_suggestions": [],
+          "sub_weight": 1
         }
-    ]
+      ]
     },
     {
-    "aspect": "表現と構成",
-    "description": "議論の明確さ、構成、説得力を評価し、改善点を提案します",
-    "target_documents": ["affirmative_argument", "reconstruction"],
-    "evaluation_points": [
+      "aspect": "表現の評価",
+      "description": "主張が聴衆を説得し，同意を得るために適切で効果的な言語表現がなされているか",
+      "target_documents": ["affirmative_argument", "reconstruction"],
+      "weight": 1,
+      "evaluation_points": [
         {
-        "focus": "言語の明確性",
-        "guiding_questions": [
-            "使用されている言語は明確で理解しやすいですか？",
-            "専門用語や複雑な概念は適切に説明されていますか？"
-        ],
-        "improvement_suggestions": [
-            "複雑な概念や専門用語を使用する際は、簡潔な説明や例を添えることを検討してください。",
-            "文章を読み直し、曖昧な表現や冗長な部分を見直し、より簡潔で明確な表現に修正してください。"
-        ]
+          "focus": "言語の明確性",
+          "sub_evaluation_points": [
+            "使用されている言語は明確で誤解を招かないか",
+            "専門用語や複雑な概念は適切に説明されているか"
+          ],
+          "sub_target_document": ["affirmative_argument", "reconstruction"],
+          "improvement_suggestions": [],
+          "sub_weight": 1
         },
         {
-        "focus": "構造と組織化",
-        "guiding_questions": [
-            "議論の構造は論理的に組織化されていますか？",
-            "各段落や節の役割は明確ですか？"
-        ],
-        "improvement_suggestions": [
-            "議論の主要ポイントを明確にし、各段落がそれらのポイントをどのように支持しているか確認してください。",
-            "トピックセンテンスや接続語を効果的に使用し、議論の流れをより明確にすることを検討してください。"
-        ]
+          "focus": "構造",
+          "sub_evaluation_points": [
+            "各段落や節の役割は明確であるか"
+          ],
+          "sub_target_document": ["affirmative_argument", "reconstruction"],
+          "improvement_suggestions": [],
+          "sub_weight": 1
         }
-    ]
+      ]
     }
-]
+  ]
