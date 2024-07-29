@@ -1,7 +1,10 @@
+# main.py
+
 import os
+from typing import Dict, Any
 from dotenv import load_dotenv
-from src.models.debate_data import DebateData
-from src.models.evaluation_criteria import EvaluationCriteria
+from src.debate.debate_data import DebateData
+from src.debate.evaluation_criteria import EvaluationCriteria
 from src.agents.evaluation_agent import EvaluationAgent
 from src.agents.summary_agent import SummaryAgent
 from src.agents.feedback_agent import FeedbackAgent
@@ -9,6 +12,7 @@ from src.llm.openai_client import OpenAIClient
 from src.utils.data_loader import load_debate_data, load_evaluation_criteria
 from src.utils.prompt_loader import load_prompt
 from src.utils.output_handler import save_output
+from src.debate.evaluation_criteria import EvaluationCriteria, AspectCriteria, EvaluationPoint
 
 def get_env_or_default(key: str, default: str) -> str:
     return os.getenv(key, default)
@@ -30,18 +34,25 @@ def main():
     evaluation_prompt = load_prompt(get_env_or_default('EVALUATION_PROMPT_PATH', 'data/prompts/evaluation_prompt.json'))
     summary_prompt = load_prompt(get_env_or_default('SUMMARY_PROMPT_PATH', 'data/prompts/summary_prompt.json'))
     feedback_prompt = load_prompt(get_env_or_default('FEEDBACK_PROMPT_PATH', 'data/prompts/feedback_prompt.json'))
-
-    # Create agents with individual models
+    
+    # Create evaluation agents dynamically based on aspects
     evaluation_model = get_env_or_default('EVALUATION_MODEL', 'gpt-3.5-turbo')
+    evaluation_agents = []
+    for aspect in evaluation_criteria.criteria:
+        agent = EvaluationAgent(OpenAIClient(api_key, evaluation_model), evaluation_prompt, aspect.__dict__)
+        evaluation_agents.append(agent)
+
+    # Create summary and feedback agents
     summary_model = get_env_or_default('SUMMARY_MODEL', 'gpt-3.5-turbo')
     feedback_model = get_env_or_default('FEEDBACK_MODEL', 'gpt-3.5-turbo')
-
-    evaluation_agent = EvaluationAgent(OpenAIClient(api_key, evaluation_model), evaluation_prompt)
     summary_agent = SummaryAgent(OpenAIClient(api_key, summary_model), summary_prompt)
     feedback_agent = FeedbackAgent(OpenAIClient(api_key, feedback_model), feedback_prompt)
 
     # Perform evaluations
-    evaluation_results = evaluation_agent.evaluate(debate_data, evaluation_criteria)
+    evaluation_results = []
+    for agent in evaluation_agents:
+        result = agent.evaluate(debate_data)
+        evaluation_results.append(result)
 
     # Summarize results
     summary = summary_agent.summarize(evaluation_results)
@@ -51,7 +62,7 @@ def main():
 
     # Prepare agent configurations
     agent_configs = {
-        "evaluation_agent": {"model": evaluation_model, "prompt": evaluation_prompt},
+        "evaluation_agents": [{"model": evaluation_model, "prompt": evaluation_prompt, "aspect": agent.aspect.aspect} for agent in evaluation_agents],
         "summary_agent": {"model": summary_model, "prompt": summary_prompt},
         "feedback_agent": {"model": feedback_model, "prompt": feedback_prompt}
     }

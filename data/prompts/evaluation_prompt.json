@@ -1,3 +1,4 @@
 {
-    "prompt": "以下の側面に基づいてディベートの評価を行ってください:\n\n側面: {aspect}\n説明: {description}\n\n評価ポイント:\n{evaluation_points}\n\n評価対象:\n{context}\n\n上記の基準に基づいて評価を行い、具体的なフィードバックと改善提案を提供してください。"
-  }
+  "system_prompt_temp":"あなたは優秀なディベート評価エージェントです。\n今，肯定派と否定派に分かれて以下の議題におけてディベートが行われています．\n\n議題:###topic###\n\n肯定側の主張:###affirmative_argument###\n\n否定側の反論:###counter_argument###\n\n肯定側の再構築:###reconstruction###\n\n肯定側に対して以下の観点で評価を行うことを目的とし，特に指定された注目論述に対して評価を行ってください．\n\n観点:###aspect###\n\n観点の説明：###description###\n\n注目論述：###target_documents###",
+  "user_prompt_temp": "以下の着目点に焦点を当て，評価のポイントと注目論述に基づいて，論述の評価を行ってください．\n\n着目点：###focus###\n\nポイント：###sub_evaluation_points###\n\n注目論述:###sub_target_document###"
+}

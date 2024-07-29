@@ -1,48 +1,59 @@
-from typing import List, Dict, Any
+from typing import Dict, Any
 from src.debate.debate_data import DebateData
-from src.debate.evaluation_criteria import EvaluationCriteria
 from src.llm.llm_client import LLMClient
+from src.debate.evaluation_criteria import AspectCriteria
 
 class EvaluationAgent:
-    def __init__(self, llm_client: LLMClient, prompt_template: str):
+    def __init__(self, llm_client: LLMClient, prompt_template: Dict[str, str], aspect: AspectCriteria):
         self.llm_client = llm_client
         self.prompt_template = prompt_template
+        self.aspect = aspect
 
-    def evaluate(self, debate_data: DebateData, criteria: EvaluationCriteria) -> List[Dict[str, Any]]:
-        results = []
-        for aspect in criteria.feedback_criteria:
-            context = self._prepare_context(debate_data, aspect["target_documents"])
-            prompt = self.prompt_template.format(
-                aspect=aspect["aspect"],
-                description=aspect["description"],
-                evaluation_points=self._format_evaluation_points(aspect["evaluation_points"]),
-                context=context
-            )
-            feedback = self.llm_client.generate_text(prompt)
-            results.append({
-                "aspect": aspect["aspect"],
+    def evaluate(self, debate_data: DebateData) -> Dict[str, Any]:
+        system_prompt = self._prepare_system_prompt(debate_data)
+        focus_evaluations = []
+
+        for evaluation_point in self.aspect.evaluation_points:
+            user_prompt = self._prepare_user_prompt(evaluation_point)
+            feedback = self.llm_client.generate_text(system_prompt, user_prompt)
+            focus_evaluations.append({
+                "focus": evaluation_point.focus,
                 "feedback": feedback
             })
-        return results
 
-    def _prepare_context(self, debate_data: DebateData, target_documents: List[str]) -> str:
-        context = ""
-        for doc in target_documents:
-            if doc == "affirmative_argument":
-                context += f"肯定的議論:\n{debate_data.affirmative_argument}\n\n"
-            elif doc == "counter_argument":
-                context += f"反論:\n{debate_data.counter_argument}\n\n"
-            elif doc == "reconstruction":
-                context += f"再構築:\n{debate_data.reconstruction}\n\n"
-        return context
+        return {
+            "aspect": self.aspect.aspect,
+            "focus_evaluations": focus_evaluations
+        }
 
-    def _format_evaluation_points(self, evaluation_points: List[Dict[str, Any]]) -> str:
-        formatted = ""
-        for point in evaluation_points:
-            formatted += f"- {point['focus']}\n"
-            for question in point["guiding_questions"]:
-                formatted += f"  質問: {question}\n"
-            formatted += "  改善提案:\n"
-            for suggestion in point["improvement_suggestions"]:
-                formatted += f"    - {suggestion}\n"
-        return formatted
+    def _prepare_system_prompt(self, debate_data: DebateData) -> str:
+        return self.prompt_template["system_prompt_temp"].replace(
+            "###topic###", debate_data.topic
+        ).replace(
+            "###affirmative_argument###", debate_data.affirmative_argument
+        ).replace(
+            "###counter_argument###", debate_data.counter_argument
+        ).replace(
+            "###reconstruction###", debate_data.reconstruction
+        ).replace(
+            "###aspect###", self.aspect.aspect
+        ).replace(
+            "###description###", self.aspect.description
+        ).replace(
+            "###target_documents###", ", ".join(self.aspect.target_documents)
+        )
+
+    def _prepare_user_prompt(self, evaluation_point: Any) -> str:
+        return self.prompt_template["user_prompt_temp"].replace(
+            "###focus###", evaluation_point.focus
+        ).replace(
+            "###sub_evaluation_points###", "\n".join(evaluation_point.sub_evaluation_points)
+        ).replace(
+            "###sub_target_document###", ", ".join(evaluation_point.sub_target_document)
+        )
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "model": self.llm_client.model,
+            "aspect": self.aspect.aspect
+        }
