@@ -6,9 +6,12 @@ class OpenAIClient(LLMClient):
         openai.api_key = api_key
         self.model = model
 
-    def generate_text(self, prompt: str) -> str:
+    def generate_text(self, system_prompt: str, user_prompt: str) -> str:
         response = openai.ChatCompletion.create(
             model=self.model,
-            messages=[{"role": "user", "content": prompt}]
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ]
         )
         return response.choices[0].message.content

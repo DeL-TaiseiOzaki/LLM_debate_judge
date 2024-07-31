@@ -1,0 +1,57 @@
+[
+  {
+    "aspect": "メリット評価",
+    "description": "議題を肯定することのメリットを強く主張できているか",
+    "target_documents": ["肯定側の主張", "否定側の反論","肯定側の再構築"],
+    "weight": 1,
+    "evaluation_points": [
+      {
+        "focus": "メリットの大きさ",
+        "sub_evaluation_points": [
+          "議題を肯定することで得られるメリットは考えられるデメリットよりも大きいか",
+          "議題を肯定する前と後で変化が大きいか"
+        ],
+        "sub_target_document":["肯定側の主張", "否定側の反論", "肯定側の再構築"],
+        "improvement_suggestions": [],
+        "sub_weight": 1
+      },
+      {
+        "focus": "メリットを得られる確率",
+        "sub_evaluation_points": [
+          "主張するメリットを得るためのプランは現実的に実行可能なものなのか"
+        ],
+        "sub_target_document":["肯定側の主張", "肯定側の再構築"],
+        "improvement_suggestions": [],
+        "sub_weight": 1
+      }
+    ]
+  },
+  {
+    "aspect": "論理性評価",
+    "description": "主張が論理的に構築され、説得力のある議論を展開しているか",
+    "target_documents": ["肯定側の主張", "否定側の反論", "肯定側の再構築"],
+    "weight": 1,
+    "evaluation_points": [
+      {
+        "focus": "論理構造の一貫性",
+        "sub_evaluation_points": [
+          "主張の前提から結論までの論理の流れに飛躍や矛盾はないか",
+          "各論点が全体の主張を支持するよう適切に関連付けられているか"
+        ],
+        "sub_target_document": ["肯定側の主張","肯定側の再構築"],
+        "improvement_suggestions": [],
+        "sub_weight": 1
+      },
+      {
+        "focus": "証拠の適切性と信頼性",
+        "sub_evaluation_points": [
+          "主張を裏付ける証拠や事例が適切に提示されているか",
+          "提示された証拠は信頼できる出典から得られたものか"
+        ],
+        "sub_target_document": ["肯定側の主張","肯定側の再構築"],
+        "improvement_suggestions": [],
+        "sub_weight": 1
+      }
+    ]
+  }
+]

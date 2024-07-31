@@ -1,122 +1,122 @@
 [
-    {
-      "aspect": "メリット評価",
-      "description": "議題を肯定することのメリットを強く主張できているか",
-      "target_documents": ["affirmative_argument", "counter_argument","reconstruction"],
-      "weight": 1,
-      "evaluation_points": [
-        {
-          "focus": "メリットの大きさ",
-          "sub_evaluation_points": [
-            "議題を肯定することで得られるメリットは考えられるデメリットよりも大きいか",
-            "議題を肯定する前と後で変化が大きいか"
-          ],
-          "sub_target_document":["affirmative_argument", "counter_arugment", "reconstruction"],
-          "improvement_suggestions": [],
-          "sub_weight": 1
-        },
-        {
-          "focus": "メリットを得られる確率",
-          "sub_evaluation_points": [
-            "主張するメリットを得るためのプランは現実的に実行可能なものなのか"
-          ],
-          "sub_target_document":["affirmative_argument", "reconstruction"],
-          "improvement_suggestions": [],
-          "sub_weight": 1
-        }
-      ]
-    },
-    {
-      "aspect": "論理性評価",
-      "description": "主張が論理的に構築され、説得力のある議論を展開しているか",
-      "target_documents": ["affirmative_argument", "counter_argument", "reconstruction"],
-      "weight": 1,
-      "evaluation_points": [
-        {
-          "focus": "論理構造の一貫性",
-          "sub_evaluation_points": [
-            "主張の前提から結論までの論理の流れに飛躍や矛盾はないか",
-            "各論点が全体の主張を支持するよう適切に関連付けられているか"
-          ],
-          "sub_target_document": ["affirmative_argument","reconstruction"],
-          "improvement_suggestions": [],
-          "sub_weight": 1
-        },
-        {
-          "focus": "証拠の適切性と信頼性",
-          "sub_evaluation_points": [
-            "主張を裏付ける証拠や事例が適切に提示されているか",
-            "提示された証拠は信頼できる出典から得られたものか"
-          ],
-          "sub_target_document": ["affirmative_argument","reconstruction"],
-          "improvement_suggestions": [],
-          "sub_weight": 1
-        }
-      ]
-    },
-    {
-      "aspect": "反論への対応",
-      "description": "受けた反論を正確に認識し，自らの主張を守る，あるいは強化できているか",
-      "target_documents": ["counter_argument","reconstruction"],
-      "weight": 1,
-      "evaluation_points": [
-        {
-          "focus": "反論の理解と認識",
-          "sub_evaluation_points": [
-            "相手の反論を正確に理解しているか",
-            "反論の核心を捉えているか"
-          ],
-          "sub_target_document": ["reconstruction"],
-          "improvement_suggestions": [],
-          "sub_weight": 1
-        },
-        {
-          "focus": "反論への対応",
-          "sub_evaluation_points": [
-            "反論に対して直接的に応答しているか",
-            "反論の問題や限界を適切に指摘しているか"
-          ],
-          "sub_target_document": ["reconstruction"],
-          "improvement_suggestions": [],
-          "sub_weight": 1
-        },
-        {
-          "focus": "主張の強化と再構築",
-          "sub_evaluation_points": [
-            "反論を受けて、自身の主張を強化または修正しているか",
-            "再構築された主張は、元の主張よりも説得力が増しているか"
-          ],
-          "sub_target_document": ["reconstruction"],
-          "improvement_suggestions": [],
-          "sub_weight": 1
-        }
-      ]
-    },
-    {
-      "aspect": "表現の評価",
-      "description": "主張が聴衆を説得し，同意を得るために適切で効果的な言語表現がなされているか",
-      "target_documents": ["affirmative_argument", "reconstruction"],
-      "weight": 1,
-      "evaluation_points": [
-        {
-          "focus": "言語の明確性",
-          "sub_evaluation_points": [
-            "使用されている言語は明確で誤解を招かないか",
-            "専門用語や複雑な概念は適切に説明されているか"
-          ],
-          "sub_target_document": ["affirmative_argument", "reconstruction"],
-          "improvement_suggestions": [],
-          "sub_weight": 1
-        },
-        {
-          "focus": "構造",
-          "sub_evaluation_points": [
-            "各段落や節の役割は明確であるか"
-          ],
-          "sub_target_document": ["affirmative_argument", "reconstruction"],
-          "improvement_suggestions": [],
-          "sub_weight": 1
-        }
-      ]
-    }
-  ]
+  {
+    "aspect": "メリット評価",
+    "description": "議題を肯定することのメリットを強く主張できているか",
+    "target_documents": ["肯定側の主張", "否定側の反論","肯定側の再構築"],
+    "weight": 1,
+    "evaluation_points": [
+      {
+        "focus": "メリットの大きさ",
+        "sub_evaluation_points": [
+          "議題を肯定することで得られるメリットは考えられるデメリットよりも大きいか",
+          "議題を肯定する前と後で変化が大きいか"
+        ],
+        "sub_target_document":["肯定側の主張", "否定側の反論", "肯定側の再構築"],
+        "improvement_suggestions": [],
+        "sub_weight": 1
+      },
+      {
+        "focus": "メリットを得られる確率",
+        "sub_evaluation_points": [
+          "主張するメリットを得るためのプランは現実的に実行可能なものなのか"
+        ],
+        "sub_target_document":["肯定側の主張", "肯定側の再構築"],
+        "improvement_suggestions": [],
+        "sub_weight": 1
+      }
+    ]
+  },
+  {
+    "aspect": "論理性評価",
+    "description": "主張が論理的に構築され、説得力のある議論を展開しているか",
+    "target_documents": ["肯定側の主張", "否定側の反論", "肯定側の再構築"],
+    "weight": 1,
+    "evaluation_points": [
+      {
+        "focus": "論理構造の一貫性",
+        "sub_evaluation_points": [
+          "主張の前提から結論までの論理の流れに飛躍や矛盾はないか",
+          "各論点が全体の主張を支持するよう適切に関連付けられているか"
+        ],
+        "sub_target_document": ["肯定側の主張","肯定側の再構築"],
+        "improvement_suggestions": [],
+        "sub_weight": 1
+      },
+      {
+        "focus": "証拠の適切性と信頼性",
+        "sub_evaluation_points": [
+          "主張を裏付ける証拠や事例が適切に提示されているか",
+          "提示された証拠は信頼できる出典から得られたものか"
+        ],
+        "sub_target_document": ["肯定側の主張","肯定側の再構築"],
+        "improvement_suggestions": [],
+        "sub_weight": 1
+      }
+    ]
+  },
+  {
+    "aspect": "反論への対応",
+    "description": "受けた反論を正確に認識し，自らの主張を守る，あるいは強化できているか",
+    "target_documents": ["否定側の反論","肯定側の再構築"],
+    "weight": 1,
+    "evaluation_points": [
+      {
+        "focus": "反論の理解と認識",
+        "sub_evaluation_points": [
+          "相手の反論を正確に理解しているか",
+          "反論の核心を捉えているか"
+        ],
+        "sub_target_document": ["肯定側の再構築"],
+        "improvement_suggestions": [],
+        "sub_weight": 1
+      },
+      {
+        "focus": "反論への対応",
+        "sub_evaluation_points": [
+          "反論に対して直接的に応答しているか",
+          "反論の問題や限界を適切に指摘しているか"
+        ],
+        "sub_target_document": ["肯定側の再構築"],
+        "improvement_suggestions": [],
+        "sub_weight": 1
+      },
+      {
+        "focus": "主張の強化と再構築",
+        "sub_evaluation_points": [
+          "反論を受けて、自身の主張を強化または修正しているか",
+          "再構築された主張は、元の主張よりも説得力が増しているか"
+        ],
+        "sub_target_document": ["肯定側の再構築"],
+        "improvement_suggestions": [],
+        "sub_weight": 1
+      }
+    ]
+  },
+  {
+    "aspect": "表現の評価",
+    "description": "主張が聴衆を説得し，同意を得るために適切で効果的な言語表現がなされているか",
+    "target_documents": ["肯定側の主張", "肯定側の再構築"],
+    "weight": 1,
+    "evaluation_points": [
+      {
+        "focus": "言語の明確性",
+        "sub_evaluation_points": [
+          "使用されている言語は明確で誤解を招かないか",
+          "専門用語や複雑な概念は適切に説明されているか"
+        ],
+        "sub_target_document": ["肯定側の主張", "肯定側の再構築"],
+        "improvement_suggestions": [],
+        "sub_weight": 1
+      },
+      {
+        "focus": "構造",
+        "sub_evaluation_points": [
+          "各段落や節の役割は明確であるか"
+        ],
+        "sub_target_document": ["肯定側の主張", "肯定側の再構築"],
+        "improvement_suggestions": [],
+        "sub_weight": 1
+      }
+    ]
+  }
+]
