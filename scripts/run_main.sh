@@ -8,9 +8,9 @@ export SUMMARY_PROMPT_PATH="data/prompts/summary_prompt.json"
 export FEEDBACK_PROMPT_PATH="data/prompts/feedback_prompt.json"
 
 # Set models for each agent
-export EVALUATION_MODEL="gpt-4o"
-export SUMMARY_MODEL="gpt-4o"
-export FEEDBACK_MODEL="gpt-4o"
+export EVALUATION_MODEL="gpt-4o-2024-08-06"
+export SUMMARY_MODEL="gpt-4o-2024-08-06"
+export FEEDBACK_MODEL="gpt-4o-2024-08-06"
 
 # Set output directory
 export OUTPUT_DIR="output"
