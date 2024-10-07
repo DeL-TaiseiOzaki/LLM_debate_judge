@@ -91,32 +91,5 @@
         "sub_weight": 1
       }
     ]
-  },
-  {
-    "aspect": "表現の評価",
-    "description": "主張が聴衆を説得し，同意を得るために適切で効果的な言語表現がなされているか",
-    "target_documents": ["肯定側の主張", "肯定側の再構築"],
-    "weight": 1,
-    "evaluation_points": [
-      {
-        "focus": "言語の明確性",
-        "sub_evaluation_points": [
-          "使用されている言語は明確で誤解を招かないか",
-          "専門用語や複雑な概念は適切に説明されているか"
-        ],
-        "sub_target_document": ["肯定側の主張", "肯定側の再構築"],
-        "improvement_suggestions": [],
-        "sub_weight": 1
-      },
-      {
-        "focus": "構造",
-        "sub_evaluation_points": [
-          "各段落や節の役割は明確であるか"
-        ],
-        "sub_target_document": ["肯定側の主張", "肯定側の再構築"],
-        "improvement_suggestions": [],
-        "sub_weight": 1
-      }
-    ]
   }
 ]
