@@ -5,12 +5,14 @@ from src.debate.debate_data import DebateData
 from src.debate.evaluation_criteria import EvaluationCriteria
 from src.agents.evaluation_agent import EvaluationAgent
 from src.agents.summary_agent import SummaryAgent
+from src.agents.motion_spilit_agent import MotionspilitAgent
 from src.agents.feedback_agent import FeedbackAgent
 from src.llm.openai_client import OpenAIClient
 from src.utils.data_loader import load_debate_data, load_evaluation_criteria
 from src.utils.prompt_loader import load_prompt
 from src.utils.output_handler import save_output
 from src.utils.logger import logger
+from src.utils.output_handler import save_simplified_output
 
 def get_env_or_default(key: str, default: str) -> str:
     return os.getenv(key, default)
@@ -84,14 +86,31 @@ def main():
     }
     logger.info("Summary generation completed")
 
+    # Motion split  agent
+    logger.info("Creating topic intention agent")
+    Motion_spilit_prompt = load_prompt(get_env_or_default('MOTION_SPILIT_PROMPT_PATH', 'data/prompts/motion_spilit_prompt.json'))
+    Motion_spilit_model = get_env_or_default('TOPIC_INTENTION_MODEL', 'gpt-3.5-turbo')
+    Motion_spilit_agent = MotionspilitAgent(OpenAIClient(api_key, Motion_spilit_model), Motion_spilit_prompt)
+
+    # トピック意図の生成
+    logger.info("Generating topic intention")
+    Motion_spilit = Motion_spilit_agent.generate_intention(debate_data)
+    updated_agent_configs["topic_intention_agent"] = {
+        "model": Motion_spilit_agent.llm_client.model,
+        "prompt": {
+            "system_prompt": Motion_spilit_agent.get_system_prompt(),
+            "user_prompt": Motion_spilit_agent.get_user_prompt(debate_data.topic)
+        }
+    }
+
     # Generate feedback
     logger.info("Starting feedback generation")
-    feedback = feedback_agent.generate_feedback(debate_data, summary)
+    feedback = feedback_agent.generate_feedback(debate_data, summary, Motion_spilit)
     updated_agent_configs["feedback_agent"] = {
         "model": feedback_agent.llm_client.model,
         "prompt": {
             "system_prompt": feedback_agent.get_system_prompt(debate_data),
-            "user_prompt": feedback_agent.get_user_prompt(summary)
+            "user_prompt": feedback_agent.get_user_prompt(summary,Motion_spilit)
         }
     }
     logger.info("Feedback generation completed")
@@ -100,6 +119,16 @@ def main():
     logger.info("Saving output")
     output_dir = get_env_or_default('OUTPUT_DIR', 'output')
     save_output(output_dir, debate_data, evaluation_results, summary, feedback, updated_agent_configs)
+    
+    # 簡略化された出力を保存
+    simplified_evaluation_results = [
+        {
+            "aspect": result["aspect"],
+            "focus": result["focus"],
+            "result": result["result"]
+        } for result in evaluation_results
+    ]
+    save_simplified_output(output_dir, debate_data, simplified_evaluation_results, summary, feedback)
 
     logger.info("Debate evaluation process completed")
 

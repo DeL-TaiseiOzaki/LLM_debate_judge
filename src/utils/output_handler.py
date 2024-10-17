@@ -28,3 +28,23 @@ def save_output(output_dir: str, debate_data: DebateData, evaluation_results: Di
 
     print(f"Output saved to: {filepath}")
     return filepath
+
+def save_simplified_output(output_dir: str, debate_data: DebateData, evaluation_results: List[Dict[str, Any]], summary: str, feedback: str) -> str:
+    os.makedirs(output_dir, exist_ok=True)
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"simplified_debate_evaluation_{timestamp}.json"
+    filepath = os.path.join(output_dir, filename)
+
+    simplified_output = {
+        "debate_data": debate_data.__dict__,
+        "evaluation_results": evaluation_results,
+        "summary": summary,
+        "feedback": feedback
+    }
+
+    with open(filepath, 'w', encoding='utf-8') as f:
+        json.dump(simplified_output, f, ensure_ascii=False, indent=2)
+
+    print(f"Simplified output saved to: {filepath}")
+    return filepath

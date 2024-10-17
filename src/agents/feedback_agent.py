@@ -7,10 +7,10 @@ class FeedbackAgent:
         self.llm_client = llm_client
         self.prompt_template = prompt_template
 
-    def generate_feedback(self, debate_data: DebateData, summary: str) -> str:
+    def generate_feedback(self, debate_data: DebateData, summary: str, topic_intention: str) -> str:
         logger.info("Starting feedback generation")
         system_prompt = self.get_system_prompt(debate_data)
-        user_prompt = self.get_user_prompt(summary)
+        user_prompt = self.get_user_prompt(summary, topic_intention)
         
         logger.info("Calling API for feedback generation")
         feedback = self.llm_client.generate_text(system_prompt, user_prompt)
@@ -30,8 +30,10 @@ class FeedbackAgent:
             "###reconstruction###", debate_data.reconstruction
         )
 
-    def get_user_prompt(self, summary: str) -> str:
+    def get_user_prompt(self, summary: str, topic_intention: str) -> str:
         logger.info("Preparing user prompt for feedback")
         return self.prompt_template["user_prompt_temp"].replace(
-            "###final_evaluation###", summary 
+            "###final_evaluation###", summary
+        ).replace(
+            "###topic_intention###", topic_intention
         )
