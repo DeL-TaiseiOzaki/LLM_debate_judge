@@ -76,20 +76,20 @@ def main():
 
     # Summarize results
     logger.info("Starting summary generation")
-    summary = summary_agent.summarize(debate_data, evaluation_results)
+    summary = summary_agent.summarize(debate_data, evaluation_results, evaluation_criteria.criteria)
     updated_agent_configs["summary_agent"] = {
         "model": summary_agent.llm_client.model,
         "prompt": {
             "system_prompt": summary_agent.get_system_prompt(debate_data),
-            "user_prompt": summary_agent.get_user_prompt(evaluation_results)
+            "user_prompt": summary_agent.get_user_prompt(evaluation_results, evaluation_criteria.criteria)
         }
     }
     logger.info("Summary generation completed")
 
-    # Motion split  agent
+    # Motion split agent
     logger.info("Creating topic intention agent")
     Motion_spilit_prompt = load_prompt(get_env_or_default('MOTION_SPILIT_PROMPT_PATH', 'data/prompts/motion_spilit_prompt.json'))
-    Motion_spilit_model = get_env_or_default('TOPIC_INTENTION_MODEL', 'gpt-3.5-turbo')
+    Motion_spilit_model = get_env_or_default('MOTION_SPILIT_MODEL', 'gpt-3.5-turbo')
     Motion_spilit_agent = MotionspilitAgent(OpenAIClient(api_key, Motion_spilit_model), Motion_spilit_prompt)
 
     # トピック意図の生成
@@ -115,10 +115,10 @@ def main():
     }
     logger.info("Feedback generation completed")
 
-    # Save output
+    ## Save output
     logger.info("Saving output")
     output_dir = get_env_or_default('OUTPUT_DIR', 'output')
-    save_output(output_dir, debate_data, evaluation_results, summary, feedback, updated_agent_configs)
+    save_output(output_dir, debate_data, evaluation_results, summary, feedback, Motion_spilit, updated_agent_configs)
     
     # 簡略化された出力を保存
     simplified_evaluation_results = [
@@ -128,7 +128,7 @@ def main():
             "result": result["result"]
         } for result in evaluation_results
     ]
-    save_simplified_output(output_dir, debate_data, simplified_evaluation_results, summary, feedback)
+    save_simplified_output(output_dir, debate_data, simplified_evaluation_results, summary, feedback, Motion_spilit)
 
     logger.info("Debate evaluation process completed")
 

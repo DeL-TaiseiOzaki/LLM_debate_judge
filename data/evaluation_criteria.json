@@ -30,7 +30,7 @@
     "aspect": "論理性評価",
     "description": "主張が論理的に構築され、説得力のある議論を展開しているか",
     "target_documents": ["肯定側の主張", "否定側の反論", "肯定側の再構築"],
-    "weight": 1,
+    "weight": 0.5,
     "evaluation_points": [
       {
         "focus": "論理構造の一貫性",
